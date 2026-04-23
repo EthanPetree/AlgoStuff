@@ -286,4 +286,24 @@ public class SortingLibrary<T extends Comparable <T>>  {
 
         return pointerL;
     }
+
+    /*
+    row by row
+    recursively move to the next row
+    not safe, iterate until it is safe
+    next row, iterate if not found, backtrack to the previous and continue on
+
+solution [0,2],[1,0],[2,3],[3,1]
+    OR [2],[0],[3],[1] -- indexes are implied
+
+    --
+    row == n ? save solution/return;
+    place queen
+    validate position
+    safe -> Recurse (next row)
+    not safe || return from recursion -> iterate
+    if no more room -> return;
+
+
+     */
 }
