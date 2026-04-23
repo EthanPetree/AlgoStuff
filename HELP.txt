@@ -1,0 +1,192 @@
+================================================================================
+  Algo CSC250 - Starter Project Help
+================================================================================
+
+This is a Maven-based Java project using JUnit Jupiter (JUnit 5) for testing.
+Requires: JDK 24 and IntelliJ IDEA.
+
+
+--------------------------------------------------------------------------------
+  JDK SETUP
+--------------------------------------------------------------------------------
+
+  This project requires JDK 24 (or newer). If you don't have it installed,
+  IntelliJ can download it for you:
+
+    1. Open IntelliJ IDEA
+    2. Go to File > Project Structure (or press Ctrl+Alt+Shift+S)
+    3. Under "Project", click the SDK dropdown
+    4. Choose "Add SDK" > "Download JDK..."
+    5. Select version 24 (or latest) from any vendor (Oracle, Eclipse Temurin,
+       Amazon Corretto, etc. -- they are all fine)
+    6. Click "Download" and then "OK"
+
+  Alternatively, download a JDK directly:
+    - Eclipse Temurin (recommended): https://adoptium.net/
+    - Oracle JDK:                    https://jdk.java.net/
+    - Amazon Corretto:               https://aws.amazon.com/corretto/
+
+  After installing, make sure IntelliJ is using the correct JDK:
+    File > Project Structure > Project > SDK > select your JDK 24
+
+
+--------------------------------------------------------------------------------
+  OPENING THE PROJECT
+--------------------------------------------------------------------------------
+
+  1. Open IntelliJ IDEA
+  2. Choose "Open" (not "New Project")
+  3. Navigate to the "Algo" folder and select the pom.xml file
+  4. When prompted, choose "Open as Project"
+  5. IntelliJ will import the Maven project and download JUnit automatically
+
+  If IntelliJ asks about trusting the project, click "Trust Project".
+
+
+--------------------------------------------------------------------------------
+  PROJECT STRUCTURE (Maven Standard Layout)
+--------------------------------------------------------------------------------
+
+  Algo/
+  ├── pom.xml                          <-- Maven config (dependencies live here)
+  ├── HELP.txt                         <-- This file
+  └── src/
+      ├── main/
+      │   ├── java/                    <-- Your source code goes here
+      │   │   └── edu/neumont/
+      │   │       ├── Main.java
+      │   │       ├── csc250/
+      │   │       │   ├── sorting/     <-- Sorting algorithms & helpers
+      │   │       │   └── isomorph/    <-- Isomorph lab
+      │   │       └── csc252/          <-- Algo II (future)
+      │   └── resources/               <-- Non-code files (text files, configs)
+      │       └── edu/neumont/csc250/isomorph/txtFiles/
+      └── test/
+          └── java/                    <-- Your test code goes here
+              └── edu/neumont/
+                  ├── csc250/sorting/  <-- Sorting tests
+                  └── csc252/          <-- Algo II tests (future)
+
+
+--------------------------------------------------------------------------------
+  RUNNING THE PROGRAM
+--------------------------------------------------------------------------------
+
+  From IntelliJ:
+    - Open Main.java and click the green play button next to main()
+    - Or right-click Main.java and choose "Run 'Main'"
+
+  From the command line (if Maven is installed):
+    mvn compile exec:java
+
+
+--------------------------------------------------------------------------------
+  UNIT TESTING
+--------------------------------------------------------------------------------
+
+  This project uses JUnit Jupiter (JUnit 5) for unit testing.
+
+  RUNNING TESTS IN INTELLIJ:
+    - Right-click a test method or test class > "Run" or "Debug"
+    - Use the Run menu > "Run..." to pick any test
+    - View results in the "Run" window at the bottom of IntelliJ
+
+  RUNNING TESTS FROM COMMAND LINE:
+    mvn test                           <-- Runs ALL tests
+    mvn test -Dtest=SortingLibraryTest <-- Runs a specific test class
+
+  WRITING A NEW TEST:
+    1. Place your cursor on a class name in src/main/java
+    2. Press ALT + ENTER and choose "Create Test..."
+       (or press ALT + INS and choose "Test...")
+    3. Select the methods you want to generate test stubs for
+    4. The test file is created in src/test/java (matching package)
+
+  COMMON ASSERTIONS (import static org.junit.jupiter.api.Assertions.*):
+    assertEquals(expected, actual)          - checks two values are equal
+    assertNotEquals(unexpected, actual)     - checks two values are NOT equal
+    assertTrue(condition)                   - checks condition is true
+    assertFalse(condition)                  - checks condition is false
+    assertNull(object)                      - checks object is null
+    assertNotNull(object)                   - checks object is NOT null
+    assertArrayEquals(expected, actual)     - checks two arrays are equal
+    assertThrows(Exception.class, () -> {  - checks an exception is thrown
+        myMethod();
+    });
+    assertAll(                              - runs multiple assertions,
+        () -> assertEquals(1, a),             reports ALL failures
+        () -> assertEquals(2, b)
+    );
+
+  USEFUL TEST ANNOTATIONS:
+    @Test                              - marks a method as a test
+    @DisplayName("description")        - gives the test a readable name
+    @Disabled("reason")                - skips this test when running
+    @BeforeEach / @AfterEach           - runs before/after EACH test method
+    @BeforeAll / @AfterAll             - runs once before/after ALL tests
+
+  FULL DOCUMENTATION:
+    JUnit 5 User Guide:       https://junit.org/junit5/docs/current/user-guide/
+    Assertions Javadoc:       https://junit.org/junit5/docs/current/api/
+                              org.junit.jupiter.api/org/junit/jupiter/api/
+                              Assertions.html
+
+
+--------------------------------------------------------------------------------
+  MAVEN BASICS
+--------------------------------------------------------------------------------
+
+  Maven manages your project dependencies (like JUnit) so you don't have to
+  download JAR files manually. Dependencies are declared in pom.xml.
+
+  COMMON COMMANDS (run from the Algo/ folder):
+    mvn compile                        - compiles your source code
+    mvn test                           - compiles and runs all tests
+    mvn clean                          - deletes the target/ build folder
+    mvn clean test                     - clean build + run tests
+    mvn exec:java                      - runs the Main class
+
+  HOW DEPENDENCIES WORK:
+    - Dependencies are listed in the <dependencies> section of pom.xml
+    - Maven downloads them automatically the first time you build
+    - They are cached in your home folder (~/.m2/repository/)
+    - IntelliJ will show them under "External Libraries" in the Project view
+
+  UPDATING JUNIT TO THE LATEST VERSION:
+    1. Go to https://central.sonatype.com and search for "junit-jupiter"
+    2. Find the latest stable version number
+    3. In pom.xml, update the <junit.version> property:
+         <junit.version>5.12.2</junit.version>
+       Change 5.12.2 to whatever the latest version is.
+    4. In IntelliJ, click the Maven refresh icon (circular arrows) in the
+       Maven tool window, or right-click pom.xml > Maven > Reload Project
+
+  ADDING A NEW DEPENDENCY:
+    1. Search for the library on https://central.sonatype.com
+    2. Copy the Maven dependency XML snippet
+    3. Paste it inside the <dependencies> section in pom.xml
+    4. Reload the Maven project in IntelliJ
+
+
+--------------------------------------------------------------------------------
+  TROUBLESHOOTING
+--------------------------------------------------------------------------------
+
+  "Cannot resolve symbol" errors on JUnit imports:
+    - Right-click pom.xml > Maven > Reload Project
+    - Or open the Maven tool window and click the refresh icon
+
+  Tests not showing up / not running:
+    - Make sure test classes are in src/test/java (not src/main/java)
+    - Make sure test methods are annotated with @Test
+    - Make sure test methods are NOT private (use default or public)
+
+  "No tests found" when running:
+    - Check that the test class name ends with "Test" (e.g., SortingLibraryTest)
+    - Maven Surefire looks for *Test.java, *Tests.java, or Test*.java by default
+
+  Build errors after changing pom.xml:
+    - Try: mvn clean compile
+    - Or in IntelliJ: Build > Rebuild Project
+
+================================================================================
