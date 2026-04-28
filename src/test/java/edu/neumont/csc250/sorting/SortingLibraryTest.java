@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import edu.neumont.csc250.sorting.data.DataGenerator;
 import org.junit.jupiter.api.*;
 
+import java.util.ArrayList;
+
 /**
  * https://junit.org/junit5/docs/current/user-guide/
  * use @Disabled("Reason disabled") above a test to disable it in the run
@@ -395,4 +397,5 @@ class SortingLibraryTest {
 
         assertArrayEquals(expected, nums);
     }
+
 }

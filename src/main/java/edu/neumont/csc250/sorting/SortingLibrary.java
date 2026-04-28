@@ -1,5 +1,7 @@
 package edu.neumont.csc250.sorting;
 
+import java.util.ArrayList;
+
 public class SortingLibrary<T extends Comparable <T>>  {
 
     /**
@@ -168,7 +170,7 @@ public class SortingLibrary<T extends Comparable <T>>  {
 
      */
     public static <T extends Comparable<T>> void mergeSort(T[] o){
-        if(o.length <= 1) {
+        if(o == null || o.length <= 1) {
             return;
         }
         int half = o.length / 2;
@@ -250,7 +252,7 @@ public class SortingLibrary<T extends Comparable <T>>  {
     if L == R return L || R
      */
     public static <T extends Comparable<T>> void quickSort(T[] o, int start, int end){
-        if (start >= end){
+        if (o == null || start >= end){
             return;
         }
         int pivotI = partition(o, start, end);
@@ -263,6 +265,11 @@ public class SortingLibrary<T extends Comparable <T>>  {
     public static <T extends Comparable<T>> int partition(T[] o, int start, int end){
 
         T pivot = o[start];
+//        int middleIndex = o.length / 2;
+//        T pivotValue = o[middleIndex];
+//        o[middleIndex] = o[start];
+//        o[start] = pivotValue;
+
         int pointerL = start;
         int pointerR = end;
 
@@ -274,7 +281,7 @@ public class SortingLibrary<T extends Comparable <T>>  {
                 pointerR--;
             }
 
-            if (pointerL != pointerR && o[pointerL].compareTo( pivot) == 0 && o[pointerR].compareTo(pivot) == 0){
+            if (pointerL != pointerR && o[pointerL].compareTo(pivot) == 0 && o[pointerR].compareTo(pivot) == 0){
                 pointerL++;
                 continue;
             }
@@ -287,23 +294,4 @@ public class SortingLibrary<T extends Comparable <T>>  {
         return pointerL;
     }
 
-    /*
-    row by row
-    recursively move to the next row
-    not safe, iterate until it is safe
-    next row, iterate if not found, backtrack to the previous and continue on
-
-solution [0,2],[1,0],[2,3],[3,1]
-    OR [2],[0],[3],[1] -- indexes are implied
-
-    --
-    row == n ? save solution/return;
-    place queen
-    validate position
-    safe -> Recurse (next row)
-    not safe || return from recursion -> iterate
-    if no more room -> return;
-
-
-     */
 }
