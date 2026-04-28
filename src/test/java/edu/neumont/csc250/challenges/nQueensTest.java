@@ -20,7 +20,7 @@ class nQueensTest {
     void nQueenFindsAllSolutionsForN4(){
         ArrayList<int[]> solutions = new ArrayList<>();
 
-        nQueensChallenge.nQueens(4, 0, 0, new int[4], solutions);
+        nQueensChallenge.nQueens(4, 0, new int[4], solutions);
 
         assertEquals(2, solutions.size());
     }
@@ -29,7 +29,7 @@ class nQueensTest {
         ArrayList<int[]> solutions = new ArrayList<>();
         int[] expected = {1,3,0,2};
 
-        nQueensChallenge.nQueens(4, 0, 0, new int[4], solutions);
+        nQueensChallenge.nQueens(4, 0, new int[4], solutions);
 
         assertArrayEquals(expected, solutions.getFirst());
     }
@@ -38,7 +38,7 @@ class nQueensTest {
     void nQueenFindsAllSolutionsForN5(){
         ArrayList<int[]> solutions = new ArrayList<>();
 
-        nQueensChallenge.nQueens(5, 0, 0, new int[5], solutions);
+        nQueensChallenge.nQueens(5, 0, new int[5], solutions);
 
         assertEquals(10, solutions.size());
     }
@@ -47,8 +47,19 @@ class nQueensTest {
     void nQueenFindsAllSolutionsForN9(){
         ArrayList<int[]> solutions = new ArrayList<>();
 
-        nQueensChallenge.nQueens(9, 0, 0, new int[9], solutions);
+        nQueensChallenge.nQueens(9, 0, new int[9], solutions);
 
         assertEquals(352, solutions.size());
     }
+
+    @Test
+    void nQueenFindsAllSolutionsForN1(){
+        ArrayList<int[]> solutions = new ArrayList<>();
+
+        nQueensChallenge.nQueens(1, 0, new int[1], solutions);
+
+        assertEquals(1, solutions.size());
+    }
+
+
 }

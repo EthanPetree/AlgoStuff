@@ -3,6 +3,12 @@ package edu.neumont.csc250.challenges;
 import java.util.ArrayList;
 
 public class nQueensChallenge {
+
+    public static ArrayList<int[]> solvenQueens(int n){
+        ArrayList<int[]> solutions = new ArrayList<>();
+        nQueens(n, 0, new int[n], solutions);
+        return  solutions;
+    }
     /*
    row by row
    recursively move to the next row
@@ -21,30 +27,27 @@ solution [2],[0],[3],[1] -- indexes are implied
    ArrayList<Integer[]> solutions = new ArrayList<>();
 
     */
-    public static void nQueens(int n, int row, int col, int[] queens, ArrayList<int[]> solutions){
+    public static void nQueens(int n, int row, int[] queens, ArrayList<int[]> solutions){
         if (row == n){
             //save solution
             int[] copy = new int[n];
-            for (int i = 0; i < queens.length; i++) {
+            for (int i = 0; i < queens.length; i++) { // O(n)
                 copy[i] = queens[i];
             }
             solutions.add(copy);
             return;
         }
 
-        queens[row] = col;
-
-        while (col != n){
+        for (int col = 0; col < n; col++){
+            queens[row] = col;
             if (validate(queens, row)){
-                nQueens(n, row + 1, 0, queens, solutions);
+                nQueens(n, row + 1, queens, solutions);
             }
-            queens[row] = ++col;
         }
 
-//        return;
     }
 
-    public static boolean validate(int[] queens, int row){
+    public static boolean validate(int[] queens, int row){ // O(n)
         if (row == 0){
             return true;
         }
