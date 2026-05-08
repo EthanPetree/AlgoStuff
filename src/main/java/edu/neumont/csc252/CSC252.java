@@ -5,4 +5,5 @@ package edu.neumont.csc252;
  */
 public class CSC252 {
 
+
 }
