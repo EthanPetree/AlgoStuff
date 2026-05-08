@@ -36,34 +36,21 @@ public class DoubleLinkedList<T extends Comparable <T>> {
     public void add(T data){
         if (getHead() == null){
             setHead(new Node<>(data));
+            setTail(getHead());
         } else {
-            Node<T> lastNode = findNode(getCount() - 1);
-            lastNode.setNext(new Node(data));
+            Node<T> lastNode = getTail();
+            lastNode.setNext(new Node<>(data));
+            lastNode.getNext().setPrevious(lastNode);
+            setTail(lastNode.getNext());
         }
 
         setCount(getCount() + 1);
     }
 
-    public T get(int index){ // can I make a get that is private to return the actual node itself?
+    public T get(int index){
         Node<T> foundNode = findNode(index);
         return foundNode.getData();
     }
-
-//    private Node<T> getNode(int index){ // can I make a get that is private to return the actual node itself?
-//        if(getHead() == null || index < 0 || index >= getCount()){
-//            throw new IndexOutOfBoundsException();
-//        }
-//
-//        int currentIndex = 0;
-//        Node<T> currentNode = getHead();
-//        while(currentIndex < index){
-//            currentNode = currentNode.getNext();
-//            currentIndex++;
-//        }
-//
-//        return currentNode;
-//    }
-
 
     /**
      * Finds the node at the given index
@@ -77,15 +64,26 @@ public class DoubleLinkedList<T extends Comparable <T>> {
             throw new IndexOutOfBoundsException();
         }
 
-        if (getHead() == null){
+        if (getHead() == null || getTail() == null){
             throw new IllegalStateException();
         }
 
-        int currentIndex = 0;
-        Node<T> currentNode = getHead();
-        while(currentIndex < index){
-            currentNode = currentNode.getNext();
-            currentIndex++;
+        int currentIndex;
+        Node<T> currentNode;
+        if (index < getCount() / 2) {
+            currentNode = getHead();
+            currentIndex = 0;
+            while (currentIndex < index) {
+                currentNode = currentNode.getNext();
+                currentIndex++;
+            }
+        } else {
+            currentIndex = getCount() - 1;
+            currentNode = getTail();
+            while (currentIndex > index) {
+                currentNode = currentNode.getPrevious();
+                currentIndex--;
+            }
         }
 
         return currentNode;

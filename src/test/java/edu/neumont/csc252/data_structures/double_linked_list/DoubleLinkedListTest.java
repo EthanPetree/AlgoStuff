@@ -22,15 +22,31 @@ class DoubleLinkedListTest {
     @Test
     void SLL_CanAddItemToPopulatedCollection(){
         // Arrange
-        DoubleLinkedList<Integer> sll = new DoubleLinkedList<>();
-        sll.add(1);
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
+        dll.add(1);
 
         // Act
-        sll.add(2);
+        dll.add(2);
 
         // Assert
-        assertEquals(1, sll.get(0));
-        assertEquals(2, sll.get(1));
+        assertEquals(1, dll.get(0));
+        assertEquals(2, dll.get(1));
+    }
+
+    @Test
+    void DLL_CanAddItemToCollectionWithSeveralItems(){
+        // Arrange
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
+        dll.add(1);
+        dll.add(2);
+
+        // Act
+        dll.add(3);
+
+        // Assert
+        assertEquals(1, dll.get(0));
+        assertEquals(2, dll.get(1));
+        assertEquals(3, dll.get(2));
     }
 
     //get
