@@ -51,37 +51,67 @@ class DoubleLinkedListTest {
 
     //get
     @Test
-    void SLL_GetProperlyReturnsValueAtIndex(){
+    void DLL_GetProperlyReturnsValueAtIndex(){
         //Arrange
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
-        sll.add(1);
-        sll.add(2);
-        sll.add(3);
-        sll.add(4);
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
+        dll.add(1);
+        dll.add(2);
+        dll.add(3);
+        dll.add(4);
         int expectedValue = 3;
 
         //Act
-        int actualValue = sll.get(2);
+        int actualValue = dll.get(2);
 
         //Assert
         assertEquals(expectedValue, actualValue);
     }
 
+    @Test
+    void DLL_GetThrowsErrorIfOutOfBounds(){
+        //Arrange
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
+        dll.add(1);
+        dll.add(2);
+        dll.add(3);
+        dll.add(4);
+
+
+        //Assert
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+           dll.get(-5);
+        });
+    }
+
     //count
     @Test
-    void SLL_CountProperlyIncrementsOnAddMany(){
+    void DLL_CountProperlyIncrementsOnAddMany(){
         // Arrange
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
         int expectedCount = 6;
 
         // Act
-        sll.add(1);
-        sll.add(2);
-        sll.add(3);
-        sll.add(4);
-        sll.add(5);
-        sll.add(6);
-        int actualCount = sll.getCount();
+        dll.add(1);
+        dll.add(2);
+        dll.add(3);
+        dll.add(4);
+        dll.add(5);
+        dll.add(6);
+        int actualCount = dll.getCount();
+
+        // Assert
+        assertEquals(expectedCount, actualCount);
+    }
+
+    @Test
+    void DLL_CountWorksOnEmptyList(){
+        // Arrange
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
+        int expectedCount = 0;
+
+        // Act
+
+        int actualCount = dll.getCount();
 
         // Assert
         assertEquals(expectedCount, actualCount);
@@ -90,79 +120,79 @@ class DoubleLinkedListTest {
 
     //remove
     @Test
-    void SLL_RemoveThrowsExceptionOnEmptyList(){
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
+    void DLL_RemoveThrowsExceptionOnEmptyList(){
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
 
         assertThrows(IllegalStateException.class, () -> {
-            sll.remove();
+            dll.remove();
         });
     }
 
     @Test
-    void SLL_RemoveRemovesHeadNodeFromCollectionWithOneItem(){
+    void DLL_RemoveRemovesHeadNodeFromCollectionWithOneItem(){
         //arrange
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
         int expectedValue = 10;
-        sll.add(expectedValue);
+        dll.add(expectedValue);
 
         //act
-        int actualValue = sll.remove();
+        int actualValue = dll.remove();
 
         //assert
         assertEquals(expectedValue, actualValue);
     }
 
     @Test
-    void SLL_RemoveProperlyReducesCountOnRemoval(){
+    void DLL_RemoveProperlyReducesCountOnRemoval(){
         //arrange
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
-        sll.add(10);
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
+        dll.add(10);
 
         //act
-        sll.remove();
+        dll.remove();
 
         //assert
-        assertEquals(0, sll.getCount());
+        assertEquals(0, dll.getCount());
     }
 
     //remove last
     @Test
-    void SLL_RemoveLastWorksWithOneItemList(){
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
-        sll.add(10);
+    void DLL_RemoveLastWorksWithOneItemList(){
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
+        dll.add(10);
 
         //act
-        sll.removeLast();
+        dll.removeLast();
 
         //assert
-        assertEquals(0, sll.getCount());
+        assertEquals(0, dll.getCount());
     }
 
     @Test
-    void SLL_RemoveLastWorksWithSeveralItemsInList(){
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
-        sll.add(10);
-        sll.add(15);
-        sll.add(20);
-        sll.add(25);
+    void DLL_RemoveLastWorksWithSeveralItemsInList(){
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
+        dll.add(10);
+        dll.add(15);
+        dll.add(20);
+        dll.add(25);
 
         //act
-        sll.removeLast();
+        dll.removeLast();
 
         //assert
-        assertEquals(3, sll.getCount());
+        assertEquals(3, dll.getCount());
     }
 
     @Test
-    void SLL_RemoveLastRemovesCorrectItemInList(){
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
-        sll.add(10);
-        sll.add(15);
-        sll.add(20);
-        sll.add(25);
+    void DLL_RemoveLastRemovesCorrectItemInList(){
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
+        dll.add(10);
+        dll.add(15);
+        dll.add(20);
+        dll.add(25);
 
         //act
-        int actual = sll.removeLast();
+        int actual = dll.removeLast();
 
         //assert
         assertEquals(25, actual);
@@ -170,51 +200,50 @@ class DoubleLinkedListTest {
 
     //remove at
     @Test
-    void SLL_RemoveAtRemovesCorrectIndex(){
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
-        sll.add(10);
-        sll.add(15);
-        sll.add(20);
-        sll.add(25);
+    void DLL_RemoveAtRemovesCorrectIndex(){
+        SingleLinkedList<Integer> dll = new SingleLinkedList<>();
+        dll.add(10);
+        dll.add(15);
+        dll.add(20);
+        dll.add(25);
 
         //act
-        int actual = sll.removeAt(1);
+        int actual = dll.removeAt(1);
 
         //assert
         assertEquals(15, actual);
     }
 
     @Test
-    void SLL_RemoveAtHandlesEmptyList(){
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
-
+    void DLL_RemoveAtHandlesEmptyList(){
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
 
         //assert
         assertThrows(IndexOutOfBoundsException.class, () -> {
-            sll.removeAt(5);
+            dll.removeAt(5);
         });
     }
 
 
     //insert at
     @Test
-    void SLL_InsertAtZeroIndexWorksOnEmptyList(){
+    void DLL_InsertAtZeroIndexWorksOnEmptyList(){
         //arrange
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
         int expectedValue = 10;
 
         //act
-        sll.insertAt(expectedValue, 0);
-        int actualValue = sll.get(0);
+        dll.insertAt(expectedValue, 0);
+        int actualValue = dll.get(0);
 
         //assert
         assertEquals(expectedValue, actualValue);
     }
 
     @Test
-    void SLL_InsertAtMiddleIndexWorksOnPopulatedList(){
+    void DLL_InsertAtMiddleIndexWorksOnPopulatedList(){
         //arrange
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
+        DoubleLinkedList<Integer> sll = new DoubleLinkedList<>();
         sll.add(1);
         sll.add(2);
         sll.add(4);
@@ -232,49 +261,49 @@ class DoubleLinkedListTest {
     }
 
     @Test
-    void SLL_InsertAtProperlyIncreasesCount(){
+    void DLL_InsertAtProperlyIncreasesCount(){
         //arrange
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
-        sll.add(1);
-        sll.add(3);
-        sll.add(4);
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
+        dll.add(1);
+        dll.add(3);
+        dll.add(4);
         int expectedCount = 4;
 
         //act
-        sll.insertAt(2, 1);
+        dll.insertAt(2, 1);
 
         //assert
-        assertEquals(expectedCount, sll.getCount());
+        assertEquals(expectedCount, dll.getCount());
     }
 
     //to string
     @Test
-    void SLL_ToStringWorksOnSimpleList(){
+    void DLL_ToStringWorksOnSimpleList(){
         //arrange
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
-        sll.add(1);
-        sll.add(2);
-        sll.add(3);
-        sll.add(4);
-        sll.add(5);
-        sll.add(6);
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
+        dll.add(1);
+        dll.add(2);
+        dll.add(3);
+        dll.add(4);
+        dll.add(5);
+        dll.add(6);
         String expected = "1, 2, 3, 4, 5, 6";
 
         // act
-        String actual = sll.toString();
+        String actual = dll.toString();
 
         //assert
         assertEquals(expected, actual);
     }
 
     @Test
-    void SLL_ToStringWorksOnEmptyList(){
+    void DLL_ToStringWorksOnEmptyList(){
         //arrange
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
         String expected = "";
 
         // act
-        String actual = sll.toString();
+        String actual = dll.toString();
 
         //assert
         assertEquals(expected, actual);
@@ -282,60 +311,60 @@ class DoubleLinkedListTest {
 
     //clear
     @Test
-    void SLL_ClearProperlyClearsPopulatedList(){
+    void DLL_ClearProperlyClearsPopulatedList(){
         //arrange
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
-        sll.add(1);
-        sll.add(3);
-        sll.add(4);
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
+        dll.add(1);
+        dll.add(3);
+        dll.add(4);
 
         //act
-        sll.clear();
+        dll.clear();
 
         //assert
-        assertEquals(0, sll.getCount());
+        assertEquals(0, dll.getCount());
     }
 
     @Test
-    void SLL_ClearProperlyClearsEmptyList(){
+    void DLL_ClearProperlyClearsEmptyList(){
         //arrange
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
 
         //act
-        sll.clear();
+        dll.clear();
 
         //assert
-        assertEquals(0, sll.getCount());
+        assertEquals(0, dll.getCount());
     }
 
     //search
     @Test
-    void SLL_SearchReturnsValueInSimpleList(){
+    void DLL_SearchReturnsValueInSimpleList(){
         //arrange
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
-        sll.add(1);
-        sll.add(2);
-        sll.add(3);
-        sll.add(4);
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
+        dll.add(1);
+        dll.add(2);
+        dll.add(3);
+        dll.add(4);
 
         //act
-        int actual = sll.search(3);
+        int actual = dll.search(3);
 
         //assert
         assertEquals(2, actual);
     }
 
     @Test
-    void SLL_SearchReturnsInvalidIndexIfValueNotFound(){
+    void DLL_SearchReturnsInvalidIndexIfValueNotFound(){
         //arrange
-        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
-        sll.add(1);
-        sll.add(2);
-        sll.add(3);
-        sll.add(4);
+        DoubleLinkedList<Integer> dll = new DoubleLinkedList<>();
+        dll.add(1);
+        dll.add(2);
+        dll.add(3);
+        dll.add(4);
 
         //act
-        int actual = sll.search(5);
+        int actual = dll.search(5);
 
         //assert
         assertEquals(-1, actual);

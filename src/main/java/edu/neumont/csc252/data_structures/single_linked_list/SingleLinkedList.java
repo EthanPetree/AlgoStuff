@@ -135,9 +135,9 @@ public class SingleLinkedList  <T extends Comparable <T>> {
     }
 
     /**
-     *
-     * @param val
-     * @param index
+     * inserts a value at the given index
+     * @param val the value to be inserted
+     * @param index the position where the value will be inserted
      */
     public void insertAt(T val, int index){
         if (index == 0){

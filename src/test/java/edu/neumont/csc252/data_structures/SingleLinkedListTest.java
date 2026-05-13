@@ -52,6 +52,21 @@ class SingleLinkedListTest {
         assertEquals(expectedValue, actualValue);
     }
 
+    @Test
+    void SLL_GetHandlesIndexOutOfBounds(){
+        //Arrange
+        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
+        sll.add(1);
+        sll.add(2);
+        sll.add(3);
+        sll.add(4);
+
+        //Assert
+        assertThrows(IndexOutOfBoundsException.class, () -> {
+            sll.get(-5);
+        });
+    }
+
     //count
     @Test
     void SLL_CountProperlyIncrementsOnAddMany(){
@@ -66,6 +81,19 @@ class SingleLinkedListTest {
         sll.add(4);
         sll.add(5);
         sll.add(6);
+        int actualCount = sll.getCount();
+
+        // Assert
+        assertEquals(expectedCount, actualCount);
+    }
+
+    @Test
+    void SLL_CountWorksOnEmptyList(){
+        // Arrange
+        SingleLinkedList<Integer> sll = new SingleLinkedList<>();
+        int expectedCount = 0;
+
+        // Act
         int actualCount = sll.getCount();
 
         // Assert

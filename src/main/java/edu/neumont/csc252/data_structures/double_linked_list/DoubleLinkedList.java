@@ -98,8 +98,14 @@ public class DoubleLinkedList<T extends Comparable <T>> {
         if (getHead() == null){
             throw new IllegalStateException();
         }
+
         T headData = getHead().getData();
         setHead(getHead().getNext());
+        if(getHead() != null){
+            getHead().setPrevious(null);
+        } else {
+            setTail(null);
+        }
 
         //decrement
         setCount(getCount() - 1);
@@ -118,9 +124,14 @@ public class DoubleLinkedList<T extends Comparable <T>> {
             return removeLast();
         }
 
-        Node<T> previousNode = findNode(index - 1);
-        T nodeData = previousNode.getNext().getData();
-        previousNode.setNext(previousNode.getNext().getNext());
+//        Node<T> previousNode = findNode(index - 1);
+//        T nodeData = previousNode.getNext().getData();
+//        previousNode.setNext(previousNode.getNext().getNext());
+        Node<T> nodeToRemove = findNode(index);
+        T nodeData = nodeToRemove.getData();
+        nodeToRemove.getNext().setPrevious(nodeToRemove.getPrevious());
+        nodeToRemove.getPrevious().setNext(nodeToRemove.getNext());
+
         setCount(getCount() - 1);
 
         return nodeData;
@@ -133,22 +144,29 @@ public class DoubleLinkedList<T extends Comparable <T>> {
         if (getCount() == 1){
             return remove();
         }
-        Node<T> penultimateNode = findNode(getCount() - 2);
-        T returnVal = penultimateNode.getNext().getData();
-        penultimateNode.setNext(null);
+        Node<T> tailNode = getTail();
+        T returnVal = tailNode.getData();
+        setTail(tailNode.getPrevious());
+        tailNode.getPrevious().setNext(null);
+
         setCount(getCount() - 1);
 
         return returnVal;
     }
 
     /**
-     *
-     * @param val
-     * @param index
+     *inserts a value at the given index
+     * @param val the value to be inserted
+     * @param index the position where the value will be inserted
      */
     public void insertAt(T val, int index){
         if (index == 0){
-            Node<T> firstNode = new Node<>(val, getHead(), getTail());
+            if(getCount() == 0){
+                add(val);
+                return;
+            }
+            Node<T> firstNode = new Node<>(val, getHead(), null);
+            getHead().setPrevious(firstNode);
             setHead(firstNode);
         } else {
 
@@ -160,8 +178,10 @@ public class DoubleLinkedList<T extends Comparable <T>> {
         Node<T> newNode = new Node<>(val);
         // b.next = a.next
         newNode.setNext(previousIndex.getNext());
+        newNode.setPrevious(previousIndex);
         // a.next = b
         previousIndex.setNext(newNode);
+        newNode.getNext().setPrevious(newNode);
         }
 
         //increment
@@ -170,6 +190,7 @@ public class DoubleLinkedList<T extends Comparable <T>> {
 
     public void clear(){
         setHead(null);
+        setTail(null);
         setCount(0);
     }
 
@@ -178,7 +199,7 @@ public class DoubleLinkedList<T extends Comparable <T>> {
      * @param val the value to search
      * @return the first index that the search value is at, -1 if not found
      */
-    public int search(T val){
+    public int search(T val){ // is there a point to starting at the tail? it's not guaranteed to be sorted, so I think its fine
         if(getHead() == null){
             return -1;
         }
