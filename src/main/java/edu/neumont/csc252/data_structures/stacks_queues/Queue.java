@@ -7,7 +7,7 @@ Linked lists work so well with stacks and queues as they provide quick access to
 and do not require that we insert items into the middle of these lists.
  */
 public class Queue <T extends Comparable <T>> {
-    DoubleLinkedList<T> list;
+    private DoubleLinkedList<T> list;
 
     public Queue() {
         setList(new DoubleLinkedList<>());
@@ -30,12 +30,12 @@ public class Queue <T extends Comparable <T>> {
     /**
      * Returns if an item is contained in the queue or not
      * O(n)
-     * @param val the value we are finding to confirm if its in the queue
+     * @param val the value we are finding to confirm if it's in the queue
      * @return true if found false otherwise
      */
     public boolean contains(T val){
         int result = list.search(val);
-        return result != -1; //intelij did this
+        return result != -1; //IntelliJ did this
     }
 
     /**
@@ -44,7 +44,7 @@ public class Queue <T extends Comparable <T>> {
      * @return the value of the bottom item in the queue
      */
     public T peek(){
-        return list.getTail().getData(); // better way?
+        return get(list.getCount() - 1); // better way?
     }
 
     /**

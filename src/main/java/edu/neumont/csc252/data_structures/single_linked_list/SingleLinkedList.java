@@ -1,15 +1,15 @@
 package edu.neumont.csc252.data_structures.single_linked_list;
 
 public class SingleLinkedList  <T extends Comparable <T>> {
-    private Node<T> head;
+    protected Node<T> head;
     private int count = 0;
 
 
-    public Node<T> getHead() {
+    private Node<T> getHead() {
         return head;
     }
 
-    public void setHead(Node<T> head) {
+    private void setHead(Node<T> head) {
         this.head = head;
     }
 

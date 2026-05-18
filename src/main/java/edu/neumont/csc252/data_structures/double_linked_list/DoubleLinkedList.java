@@ -6,19 +6,19 @@ public class DoubleLinkedList<T extends Comparable <T>> {
     private int count = 0;
 
 
-    public Node<T> getHead() {
+    private Node<T> getHead() {
         return head;
     }
 
-    public void setHead(Node<T> head) {
+    private void setHead(Node<T> head) {
         this.head = head;
     }
 
-    public Node<T> getTail() {
+    private Node<T> getTail() {
         return tail;
     }
 
-    public void setTail(Node<T> tail) {
+    private void setTail(Node<T> tail) {
         this.tail = tail;
     }
 
